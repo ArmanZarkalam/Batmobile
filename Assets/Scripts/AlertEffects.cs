@@ -11,6 +11,13 @@ public class AlertEffects : MonoBehaviour
 
     Coroutine blinkRoutine;
 
+    void Awake()
+    {
+        // Make sure everything starts off
+        SetLights(false, false);
+        if (alarmSource != null) alarmSource.Stop();
+    }
+
     public void SetAlert(bool active)
     {
         if (active)

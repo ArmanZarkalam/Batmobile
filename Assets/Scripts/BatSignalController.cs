@@ -7,6 +7,13 @@ public class BatSignalController : MonoBehaviour
     public float rotationSpeed = 20f;
     bool isOn = false;
 
+    void Awake()
+    {
+        // Ensure the signal starts off
+        if (signalLight != null) signalLight.enabled = false;
+        isOn = false;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.B)) ToggleSignal();

@@ -20,7 +20,6 @@ public class BatmobileController : MonoBehaviour
 
     Rigidbody2D rb;
     float moveInput;
-    float turnInput;
 
     void Awake()
     {
@@ -31,7 +30,6 @@ public class BatmobileController : MonoBehaviour
     {
         // Inputs
         moveInput = Input.GetAxisRaw("Vertical");   // W/S or Up/Down
-        turnInput = -Input.GetAxisRaw("Horizontal"); // A/D or Left/Right (negative to rotate correctly)
 
         // State changes
         if (Input.GetKeyDown(KeyCode.C)) SetState(BatState.Stealth);
@@ -45,11 +43,11 @@ public class BatmobileController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float speed = GetSpeedByState();
-        Vector2 forward = transform.up;
-        rb.MovePosition(rb.position + forward * speed * moveInput * Time.fixedDeltaTime);
-        float rot = rotationSpeed * turnInput * Time.fixedDeltaTime * Mathf.Sign(moveInput == 0 ? 1 : moveInput);
-        rb.MoveRotation(rb.rotation + rot);
+        // Movement disabled: car stays in place, background scroll gives motion feeling
+        // (We keep Rigidbody2D for potential collisions/physics if needed.)
+        // float speed = GetSpeedByState();
+        // Vector2 forward = transform.up;
+        // rb.MovePosition(rb.position + forward * speed * moveInput * Time.fixedDeltaTime);
     }
 
     float GetSpeedByState()
@@ -78,7 +76,7 @@ public class BatmobileController : MonoBehaviour
             }
             else
             {
-                headlight.intensity = 1f;
+                headlight.intensity = 5f;
                 headlight.enabled = true;
             }
         }
